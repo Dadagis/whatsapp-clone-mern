@@ -3,3 +3,17 @@
   flex-direction: column;
   width: 35%;
 }
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-right: 1px solid lightgray;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 10vw;
+}
