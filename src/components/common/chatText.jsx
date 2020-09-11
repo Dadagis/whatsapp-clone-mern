@@ -8,7 +8,7 @@ export default class ChatText extends Component {
       <div className="chat-text">
         <MoodIcon />
         <form>
-          <input placeholder="Entrer un message" type="text" />
+          <input placeholder="Écrire un message" type="text" />
           <button type="submit">Envoyer</button>
         </form>
         <MicIcon />
