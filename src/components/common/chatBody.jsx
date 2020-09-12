@@ -5,7 +5,7 @@ export default class ChatBody extends Component {
   render() {
     return (
       <div className="chat-body">
-        <Message />
+        <Message messages={this.props.messages} />
       </div>
     );
   }
