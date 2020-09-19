@@ -17,10 +17,16 @@ export default class ChatText extends Component {
         name: "nom test",
         received: true,
       });
+
+      clearInput();
     };
 
     const setInput = ({ currentTarget: input }) => {
       this.setState({ input: input.value });
+    };
+
+    const clearInput = () => {
+      this.setState({ input: "" });
     };
 
     return (
