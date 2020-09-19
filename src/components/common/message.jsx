@@ -5,11 +5,16 @@ export default class Message extends Component {
     return (
       <div>
         {this.props.messages.map((message) => (
-          <p className={`chat-message ${message.received && "chat-receiver"}`}>
+          <p
+            key={message._id}
+            className={`chat-message ${message.received && "chat-receiver"}`}
+          >
             <span className="message-name">{message.name}</span>
             {message.message}
             <span className="message-timestamp">
-              {new Date().toLocaleString()}
+              {new Date(
+                message.timestamp || message.createdAt
+              ).toLocaleString()}
             </span>
           </p>
         ))}

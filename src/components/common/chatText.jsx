@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MoodIcon from "@material-ui/icons/Mood";
 import MicIcon from "@material-ui/icons/Mic";
 import axios from "../../axios";
+import { IconButton } from "@material-ui/core";
 
 export default class ChatText extends Component {
   state = {
@@ -31,7 +32,9 @@ export default class ChatText extends Component {
 
     return (
       <div className="chat-text">
-        <MoodIcon />
+        <IconButton>
+          <MoodIcon />
+        </IconButton>
         <form>
           <input
             value={this.state.input}
@@ -43,7 +46,9 @@ export default class ChatText extends Component {
             Envoyer
           </button>
         </form>
-        <MicIcon />
+        <IconButton>
+          <MicIcon />
+        </IconButton>
       </div>
     );
   }
