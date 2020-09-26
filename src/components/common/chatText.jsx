@@ -13,11 +13,20 @@ export default class ChatText extends Component {
     const sendMessage = async (e) => {
       e.preventDefault();
 
-      await axios.post("/api/messages", {
-        message: this.state.input,
-        name: "nom test",
-        received: true,
-      });
+      await axios.post(
+        "/api/messages",
+        {
+          message: this.state.input,
+          name: "nom test",
+          received: true,
+        },
+        {
+          headers: {
+            "x-auth-token":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjY3MTRhNGMzM2IwZTBiNjE2YzhjOTQiLCJpYXQiOjE2MDA1OTE0NDF9.DMGE9ZpHvYw2vy2ruR6Zqj_H63OtPmu-usp0n-Pj3Bc",
+          },
+        }
+      );
 
       clearInput();
     };

@@ -9,9 +9,16 @@ function App() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/messages/sync").then((response) => {
-      setMessages(response.data);
-    });
+    axios
+      .get("/api/messages/sync", {
+        headers: {
+          "x-auth-token":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjY3MTRhNGMzM2IwZTBiNjE2YzhjOTQiLCJpYXQiOjE2MDA1OTE0NDF9.DMGE9ZpHvYw2vy2ruR6Zqj_H63OtPmu-usp0n-Pj3Bc",
+        },
+      })
+      .then((response) => {
+        setMessages(response.data);
+      });
   }, []);
 
   useEffect(() => {
