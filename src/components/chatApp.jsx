@@ -15,7 +15,11 @@ export default function ChatApp() {
     instance
       .get("/api/users/me", { headers: { "x-auth-token": jwt } })
       .then((response) => {
-        setUser({ name: response.data.name, email: response.data.email });
+        setUser({
+          name: response.data.name,
+          email: response.data.email,
+          _id: response.data._id,
+        });
       });
   }, [jwt]);
 
