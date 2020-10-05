@@ -12,7 +12,13 @@ export default function ChatApp() {
 
   const jwt = localStorage.getItem("whatsAppToken");
   useEffect(() => {
-    instance
+    fetchUser();
+    fetchMessages();
+  }, []);
+
+  async function fetchUser() {
+    console.log("Je suis dans setUser");
+    await instance
       .get("/api/users/me", { headers: { "x-auth-token": jwt } })
       .then((response) => {
         setUser({
@@ -21,10 +27,11 @@ export default function ChatApp() {
           _id: response.data._id,
         });
       });
-  }, [jwt]);
+  }
 
-  useEffect(() => {
-    axios
+  async function fetchMessages() {
+    console.log("je suis dans set messages");
+    await axios
       .get("/api/messages/sync", {
         headers: {
           "x-auth-token": jwt,
@@ -33,7 +40,7 @@ export default function ChatApp() {
       .then((response) => {
         setMessages(response.data);
       });
-  }, [jwt]);
+  }
 
   useEffect(() => {
     const pusher = new Pusher("dbb1d6a74095b5cc4f07", {
@@ -53,7 +60,7 @@ export default function ChatApp() {
 
   return (
     <div className="App-body">
-      <Sidebar />
+      <Sidebar user={user} token={jwt} />
       <Chat messages={messages} user={user} token={jwt} />
     </div>
   );
