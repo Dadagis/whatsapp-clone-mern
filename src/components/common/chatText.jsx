@@ -22,8 +22,7 @@ export default class ChatText extends Component {
         },
         {
           headers: {
-            "x-auth-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjY3MTRhNGMzM2IwZTBiNjE2YzhjOTQiLCJpYXQiOjE2MDA1OTE0NDF9.DMGE9ZpHvYw2vy2ruR6Zqj_H63OtPmu-usp0n-Pj3Bc",
+            "x-auth-token": this.props.token,
           },
         }
       );

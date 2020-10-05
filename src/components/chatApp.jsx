@@ -50,7 +50,7 @@ export default function ChatApp() {
   return (
     <div className="App-body">
       <Sidebar />
-      <Chat messages={messages} user={user} />
+      <Chat messages={messages} user={user} token={jwt} />
     </div>
   );
 }
