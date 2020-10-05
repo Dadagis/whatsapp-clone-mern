@@ -4,7 +4,7 @@ import "../style/form.css";
 import axios from "../axios";
 import { useState } from "react";
 
-export default function Register() {
+export default function Register(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,18 +12,24 @@ export default function Register() {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post("/api/users/", {
-        name: name,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        localStorage.setItem(
-          "whatsApp-token",
-          response.headers["x-auth-token"]
-        );
-      });
+    try {
+      await axios
+        .post("/api/users/", {
+          name: name,
+          email: email,
+          password: password,
+        })
+        .then((response) => {
+          localStorage.setItem(
+            "whatsApp-token",
+            response.headers["x-auth-token"]
+          );
+        });
+
+      props.history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleChange = ({ currentTarget: input }) => {
     if (input.id === "name") {
