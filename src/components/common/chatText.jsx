@@ -13,11 +13,19 @@ export default class ChatText extends Component {
     const sendMessage = async (e) => {
       e.preventDefault();
 
-      await axios.post("/api/messages", {
-        message: this.state.input,
-        name: "nom test",
-        received: true,
-      });
+      await axios.post(
+        "/api/messages",
+        {
+          message: this.state.input,
+          name: this.props.user.name,
+          emitter: this.props.user._id,
+        },
+        {
+          headers: {
+            "x-auth-token": this.props.token,
+          },
+        }
+      );
 
       clearInput();
     };

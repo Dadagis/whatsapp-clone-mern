@@ -8,7 +8,7 @@ export default class ChatBody extends Component {
   render() {
     return (
       <div className="chat-body" ref={(ref) => (this.newData = ref)}>
-        <Message messages={this.props.messages} />
+        <Message messages={this.props.messages} user={this.props.user} />
       </div>
     );
   }
