@@ -10,7 +10,7 @@ export default class Chat extends Component {
       <div className="chat">
         <ChatHeader />
         <ChatBody messages={this.props.messages} />
-        <ChatText />
+        <ChatText user={this.props.user} />
       </div>
     );
   }

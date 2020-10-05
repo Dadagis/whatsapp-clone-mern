@@ -13,12 +13,9 @@ export default function Login(props) {
 
     try {
       await instance
-        .post("/api/auth/login", { email: email, password: password })
+        .post("/api/auth/login/", { email: email, password: password })
         .then((response) => {
-          localStorage.setItem(
-            "whatsApp-token",
-            response.headers["x-auth-token"]
-          );
+          localStorage.setItem("whatsAppToken", response.data);
         });
       props.history.push("/");
     } catch (error) {

@@ -21,7 +21,7 @@ export default function Register(props) {
         })
         .then((response) => {
           localStorage.setItem(
-            "whatsApp-token",
+            "whatsAppToken",
             response.headers["x-auth-token"]
           );
         });
