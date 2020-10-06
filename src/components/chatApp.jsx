@@ -17,12 +17,12 @@ export default function ChatApp(props) {
   useEffect(() => {
     fetchUser();
     fetchMessages();
-  }, []);
+  }, [props.location.pathname]);
 
   useEffect(() => {
     console.log("je suis dans current chat");
     setCurrentChat(props.location.pathname.split("/")[2]);
-  }, [currentChat]);
+  }, [currentChat, props.location.pathname]);
 
   useEffect(() => {
     console.log("je suis dans current user names");
