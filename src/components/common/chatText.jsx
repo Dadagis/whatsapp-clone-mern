@@ -19,6 +19,7 @@ export default class ChatText extends Component {
           message: this.state.input,
           name: this.props.user.name,
           emitter: this.props.user._id,
+          conversation: this.props.currentChat,
         },
         {
           headers: {

@@ -9,7 +9,11 @@ export default class ChatHeaderInfos extends Component {
           <AvatarIcon />
         </div>
         <div className="infos">
-          <h3>room name</h3>
+          <h3>
+            {this.props.currentUserNames.map((name) => {
+              return <span key={name}>{name} </span>;
+            })}
+          </h3>
           <p>last seen at</p>
         </div>
       </div>

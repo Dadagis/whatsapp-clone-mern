@@ -6,7 +6,7 @@ export default class ChatHeader extends Component {
   render() {
     return (
       <div className="chat-header">
-        <ChatHeaderInfos />
+        <ChatHeaderInfos currentUserNames={this.props.currentUserNames} />
         <ChatHeaderIcons />
       </div>
     );
