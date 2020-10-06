@@ -9,6 +9,8 @@ import instance from "../axios";
 export default function ChatApp() {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
+  const [otherUsers, setOtherUsers] = useState([]);
+  const [conversationsId, setConversationsId] = useState([]);
 
   const jwt = localStorage.getItem("whatsAppToken");
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function ChatApp() {
     await instance
       .get("/api/users/me", { headers: { "x-auth-token": jwt } })
       .then((response) => {
-        setUser({
+        return setUser({
           name: response.data.name,
           email: response.data.email,
           _id: response.data._id,
@@ -58,9 +60,33 @@ export default function ChatApp() {
     };
   }, [messages]);
 
+  useEffect(() => {
+    if (Object.keys(user).length > 0) {
+      console.log("conversations fetch");
+      instance
+        .get(`/api/conversations/user/${user._id}`, {
+          headers: { "x-auth-token": jwt },
+        })
+        .then((response) => {
+          setConversationsId(response.data);
+        });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    console.log("je suis dans otherUser");
+    if (conversationsId.length > 0) {
+      let others = [];
+      conversationsId.map((obj) => {
+        others = [...others, obj.users.filter((e) => e !== user._id)];
+      });
+      setOtherUsers(others);
+    }
+  }, [conversationsId]);
+
   return (
     <div className="App-body">
-      <Sidebar user={user} token={jwt} />
+      <Sidebar user={user} otherUser={otherUsers} token={jwt} />
       <Chat messages={messages} user={user} token={jwt} />
     </div>
   );

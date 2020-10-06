@@ -10,7 +10,11 @@ export default function Sidebar(props) {
       <SidebarHeader />
       <SidebarSearch />
       <div className="chats">
-        <SidebarChat user={props.user} token={props.token} />
+        <SidebarChat
+          user={props.user}
+          otherUser={props.otherUser}
+          token={props.token}
+        />
       </div>
     </div>
   );

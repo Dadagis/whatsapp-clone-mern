@@ -14,26 +14,6 @@ export default function SidebarChat(props) {
   //   setUserObj(user);
   // }, []);
 
-  async function fetchConversations(jwt, user) {
-    console.log(user);
-    console.log("conversations fetch");
-    await instance
-      .get(`/api/conversations/user/${user._id}`, {
-        headers: { "x-auth-token": jwt },
-      })
-      .then((response) => {
-        setConversationsId(response.data);
-      });
-
-    console.log(user);
-    if (conversationsId.lenght > 0) {
-      const otherUser = conversationsId.find(user._id);
-      console.log(otherUser);
-    }
-  }
-
-  // fetchConversations(token, user);
-
   return (
     <div className="chats">
       <h1>Mes conversations</h1>
