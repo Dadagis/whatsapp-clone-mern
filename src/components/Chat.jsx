@@ -8,7 +8,7 @@ export default class Chat extends Component {
   render() {
     return (
       <div className="chat">
-        <ChatHeader />
+        <ChatHeader currentUserNames={this.props.currentUserNames} />
         <ChatBody messages={this.props.messages} user={this.props.user} />
         <ChatText
           user={this.props.user}

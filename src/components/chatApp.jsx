@@ -11,6 +11,7 @@ export default function ChatApp(props) {
   const [user, setUser] = useState({});
   const [conversations, setconversations] = useState([]);
   const [currentChat, setCurrentChat] = useState("");
+  const [currentUserNames, setCurrentUserNames] = useState([]);
 
   const jwt = localStorage.getItem("whatsAppToken");
   useEffect(() => {
@@ -22,6 +23,17 @@ export default function ChatApp(props) {
     console.log("je suis dans current chat");
     setCurrentChat(props.location.pathname.split("/")[2]);
   }, [currentChat]);
+
+  useEffect(() => {
+    console.log("je suis dans current user names");
+    conversations.map((conversation) => {
+      if (conversation._id === currentChat) {
+        setCurrentUserNames(
+          conversation.usersNames.filter((names) => names !== user.name)
+        );
+      }
+    });
+  }, [conversations]);
 
   async function fetchUser() {
     console.log("Je suis dans setUser");
@@ -86,6 +98,7 @@ export default function ChatApp(props) {
         user={user}
         token={jwt}
         currentChat={currentChat}
+        currentUserNames={currentUserNames}
       />
     </div>
   );
