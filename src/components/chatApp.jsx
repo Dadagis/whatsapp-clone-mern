@@ -9,8 +9,7 @@ import instance from "../axios";
 export default function ChatApp() {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
-  const [otherUsers, setOtherUsers] = useState([]);
-  const [conversationsId, setConversationsId] = useState([]);
+  const [conversations, setconversations] = useState([]);
 
   const jwt = localStorage.getItem("whatsAppToken");
   useEffect(() => {
@@ -68,25 +67,14 @@ export default function ChatApp() {
           headers: { "x-auth-token": jwt },
         })
         .then((response) => {
-          setConversationsId(response.data);
+          setconversations(response.data);
         });
     }
   }, [user]);
 
-  useEffect(() => {
-    console.log("je suis dans otherUser");
-    if (conversationsId.length > 0) {
-      let others = [];
-      conversationsId.map((obj) => {
-        others = [...others, obj.users.filter((e) => e !== user._id)];
-      });
-      setOtherUsers(others);
-    }
-  }, [conversationsId]);
-
   return (
     <div className="App-body">
-      <Sidebar user={user} otherUser={otherUsers} token={jwt} />
+      <Sidebar user={user} conversations={conversations} messages={messages} />
       <Chat messages={messages} user={user} token={jwt} />
     </div>
   );

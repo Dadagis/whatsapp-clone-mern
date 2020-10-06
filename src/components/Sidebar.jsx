@@ -12,8 +12,8 @@ export default function Sidebar(props) {
       <div className="chats">
         <SidebarChat
           user={props.user}
-          otherUser={props.otherUser}
-          token={props.token}
+          conversations={props.conversations}
+          messages={props.messages}
         />
       </div>
     </div>

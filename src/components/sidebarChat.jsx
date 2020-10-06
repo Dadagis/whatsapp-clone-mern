@@ -4,20 +4,21 @@ import instance from "../axios";
 import Conversation from "./Conversation";
 
 export default function SidebarChat(props) {
-  const [userObj, setUserObj] = useState({});
-  const [conversationsId, setConversationsId] = useState([]);
-
-  const { user, token } = props;
-
-  // useEffect(() => {
-  //   console.log("je suis dans set user");
-  //   setUserObj(user);
-  // }, []);
+  const { user, conversations, messages } = props;
+  console.log(conversations);
 
   return (
     <div className="chats">
       <h1>Mes conversations</h1>
-      <Conversation />
+      {conversations.map((conversation) => {
+        return (
+          <Conversation
+            user={user}
+            conversation={conversation}
+            messages={messages}
+          />
+        );
+      })}
     </div>
   );
 }
