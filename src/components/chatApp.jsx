@@ -50,8 +50,9 @@ export default function ChatApp(props) {
 
   async function fetchMessages() {
     console.log("je suis dans set messages");
+    const param = props.location.pathname.split("/")[2];
     await axios
-      .get("/api/messages/sync", {
+      .get(`/api/messages/${param}`, {
         headers: {
           "x-auth-token": jwt,
         },
