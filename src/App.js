@@ -9,6 +9,7 @@ function App() {
   return (
     <div className="App">
       <Switch>
+        <Route path="/chats/:id" component={ChatApp} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/" component={ChatApp} />

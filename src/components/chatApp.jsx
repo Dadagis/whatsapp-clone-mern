@@ -6,16 +6,22 @@ import axios from "../axios";
 import JwtDecode from "jwt-decode";
 import instance from "../axios";
 
-export default function ChatApp() {
+export default function ChatApp(props) {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
   const [conversations, setconversations] = useState([]);
+  const [currentChat, setCurrentChat] = useState("");
 
   const jwt = localStorage.getItem("whatsAppToken");
   useEffect(() => {
     fetchUser();
     fetchMessages();
   }, []);
+
+  useEffect(() => {
+    console.log("je suis dans current chat");
+    setCurrentChat(props.location.pathname.split("/")[2]);
+  }, [currentChat]);
 
   async function fetchUser() {
     console.log("Je suis dans setUser");
@@ -75,7 +81,12 @@ export default function ChatApp() {
   return (
     <div className="App-body">
       <Sidebar user={user} conversations={conversations} messages={messages} />
-      <Chat messages={messages} user={user} token={jwt} />
+      <Chat
+        messages={messages}
+        user={user}
+        token={jwt}
+        currentChat={currentChat}
+      />
     </div>
   );
 }

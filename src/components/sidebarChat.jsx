@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../style/sidebarChat.css";
-import instance from "../axios";
 import Conversation from "./Conversation";
 
 export default function SidebarChat(props) {
   const { user, conversations, messages } = props;
-  console.log(conversations);
 
   return (
     <div className="chats">
@@ -13,6 +11,7 @@ export default function SidebarChat(props) {
       {conversations.map((conversation) => {
         return (
           <Conversation
+            key={conversation._id}
             user={user}
             conversation={conversation}
             messages={messages}
