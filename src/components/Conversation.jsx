@@ -22,7 +22,9 @@ export default function Conversation(props) {
                 return <span key={name}>{name} </span>;
               })}
           </h2>
-          <p>{_.last(messages).message}</p>
+          <p>
+            {messages.length > 0 ? _.last(messages).message : "aucun message"}
+          </p>
         </div>
       </div>
     </NavLink>

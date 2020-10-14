@@ -7,6 +7,7 @@ import JwtDecode from "jwt-decode";
 import instance from "../axios";
 
 export default function ChatApp(props) {
+  const [allMessages, setAllMessages] = useState([]);
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
   const [conversations, setconversations] = useState([]);
@@ -17,12 +18,13 @@ export default function ChatApp(props) {
   useEffect(() => {
     fetchUser();
     fetchMessages();
-  }, []);
+    fetchAllMessages();
+  }, [props.location.pathname]);
 
   useEffect(() => {
     console.log("je suis dans current chat");
     setCurrentChat(props.location.pathname.split("/")[2]);
-  }, [currentChat]);
+  }, [currentChat, props.location.pathname]);
 
   useEffect(() => {
     console.log("je suis dans current user names");
@@ -50,14 +52,28 @@ export default function ChatApp(props) {
 
   async function fetchMessages() {
     console.log("je suis dans set messages");
+    const param = props.location.pathname.split("/")[2];
     await axios
-      .get("/api/messages/sync", {
+      .get(`/api/messages/${param}`, {
         headers: {
           "x-auth-token": jwt,
         },
       })
       .then((response) => {
         setMessages(response.data);
+      });
+  }
+
+  async function fetchAllMessages() {
+    console.log("je suis dans set all messages");
+    await axios
+      .get(`/api/messages/sync`, {
+        headers: {
+          "x-auth-token": jwt,
+        },
+      })
+      .then((response) => {
+        setAllMessages(response.data);
       });
   }
 
@@ -90,6 +106,31 @@ export default function ChatApp(props) {
     }
   }, [user]);
 
+  const allTheMessages = allMessages;
+  let array = [];
+  conversations.map((conv) => {
+    array = [
+      ...array,
+      allTheMessages.filter((message) => {
+        return conv._id === message.conversation;
+      }),
+    ];
+  });
+  console.log(array);
+  // allTheMessages.filter((message) => {
+  //   console.log(conversations);
+  //   conversations.includes(message.conversation)
+  //     ? console.log("OUI")
+  //     : console.log("NON");
+  // array = [...array, conversations.includes(message.conversation)];
+  // return array;
+  // });
+  // console.log(array);
+  // console.log("lol", allTheMessages);
+  // allTheMessages.filter((messages) => {
+  //   conversations.includes(messages.conversation);
+  // });
+  // console.log("allTheMessages", allTheMessages);
   return (
     <div className="App-body">
       <Sidebar user={user} conversations={conversations} messages={messages} />
