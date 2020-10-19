@@ -47,3 +47,6 @@
   color: gray;
   padding: 1rem;
 }
+#sidebar-chats-container {
+  overflow: scroll;
+}

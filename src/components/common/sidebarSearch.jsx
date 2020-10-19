@@ -7,6 +7,8 @@ export default function SidebarSearch(props) {
   const [input, setInput] = useState("");
   const [filtered, setFiltered] = useState([]);
 
+  const { user } = props;
+
   const jwt = localStorage.getItem("whatsAppToken");
   useEffect(() => {
     axios
@@ -18,16 +20,27 @@ export default function SidebarSearch(props) {
       });
   }, []);
 
-  const setValue = ({ currentTarget: input }) => {
-    setInput(input.value);
-  };
-
   useEffect(() => {
     let filtered = users
       .filter((user) => user.name.includes(input))
       .slice(0, 10);
     return setFiltered(filtered);
   }, [input]);
+
+  const setValue = ({ currentTarget: input }) => {
+    setInput(input.value);
+  };
+
+  const handleClick = (user_id) => {
+    axios.post(
+      "http://localhost:4000/api/conversations/",
+      { users: [user._id, user_id] },
+      {
+        headers: { "x-auth-token": jwt },
+      }
+    );
+    setFiltered([]);
+  };
 
   return (
     <div className="sidebar-search">
@@ -43,7 +56,11 @@ export default function SidebarSearch(props) {
           {filtered.length >= 1
             ? filtered.map((user) => {
                 return (
-                  <li key={user._id} className="users-list">
+                  <li
+                    key={user._id}
+                    onClick={() => handleClick(user._id)}
+                    className="users-list"
+                  >
                     {user.name}
                   </li>
                 );
