@@ -13,6 +13,7 @@ export default class Chat extends Component {
           messages={this.props.messages}
           user={this.props.user}
           currentChat={this.props.currentChat}
+          location={this.props.location}
         />
         <ChatText
           user={this.props.user}

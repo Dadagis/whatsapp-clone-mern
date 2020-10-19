@@ -3,8 +3,9 @@ import Sidebar from "./Sidebar";
 import Chat from "./Chat";
 import Pusher from "pusher-js";
 import axios from "../axios";
-import JwtDecode from "jwt-decode";
 import instance from "../axios";
+import isAuthenticated from "../services/authService";
+import { Redirect } from "react-router-dom";
 
 export default function ChatApp(props) {
   const [allMessages, setAllMessages] = useState([]);
@@ -116,21 +117,8 @@ export default function ChatApp(props) {
       }),
     ];
   });
-  console.log(array);
-  // allTheMessages.filter((message) => {
-  //   console.log(conversations);
-  //   conversations.includes(message.conversation)
-  //     ? console.log("OUI")
-  //     : console.log("NON");
-  // array = [...array, conversations.includes(message.conversation)];
-  // return array;
-  // });
   // console.log(array);
-  // console.log("lol", allTheMessages);
-  // allTheMessages.filter((messages) => {
-  //   conversations.includes(messages.conversation);
-  // });
-  // console.log("allTheMessages", allTheMessages);
+  if (!isAuthenticated()) return <Redirect to="/login" />;
   return (
     <div className="App-body">
       <Sidebar user={user} conversations={conversations} messages={messages} />
@@ -140,6 +128,7 @@ export default function ChatApp(props) {
         token={jwt}
         currentChat={currentChat}
         currentUserNames={currentUserNames}
+        location={props.location.pathname}
       />
     </div>
   );

@@ -6,7 +6,7 @@ export default class Message extends Component {
     return (
       <div>
         {this.props.messages.map((message) => {
-          console.log(message);
+          // console.log(message);
           if (message.conversation === currentChat) {
             return (
               <p

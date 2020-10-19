@@ -8,8 +8,8 @@ export default function Sidebar(props) {
   return (
     <div className="sidebar">
       <SidebarHeader />
-      <SidebarSearch />
-      <div className="chats">
+      <SidebarSearch user={props.user} />
+      <div className="chats" id="sidebar-chats-container">
         <SidebarChat
           user={props.user}
           conversations={props.conversations}
