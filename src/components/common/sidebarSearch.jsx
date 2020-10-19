@@ -23,11 +23,11 @@ export default function SidebarSearch(props) {
   };
 
   useEffect(() => {
-    const filtered = users.filter((user) => user.name.includes(input));
+    let filtered = users
+      .filter((user) => user.name.includes(input))
+      .slice(0, 10);
     return setFiltered(filtered);
   }, [input]);
-
-  console.log("filtered", filtered);
 
   return (
     <div className="sidebar-search">
@@ -39,7 +39,17 @@ export default function SidebarSearch(props) {
           placeholder="Chercher ou démarrer un nouveau chat"
           type="text"
         />
-        <ul></ul>
+        <ul className="users-display">
+          {filtered.length >= 1
+            ? filtered.map((user) => {
+                return (
+                  <li key={user._id} className="users-list">
+                    {user.name}
+                  </li>
+                );
+              })
+            : null}
+        </ul>
       </div>
     </div>
   );
