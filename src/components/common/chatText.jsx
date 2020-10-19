@@ -39,6 +39,12 @@ export default class ChatText extends Component {
       this.setState({ input: "" });
     };
 
+    const disable = () => {
+      const areMessages = document.getElementsByClassName("no-messages");
+      return areMessages.length >= 1 ? true : false;
+    };
+    console.log(disable());
+
     return (
       <div className="chat-text">
         <IconButton>
@@ -48,8 +54,11 @@ export default class ChatText extends Component {
           <input
             value={this.state.input}
             onChange={setInput}
-            placeholder="Écrire un message"
+            placeholder={
+              disable() ? "Sélectionnez une conversation" : "Écrire un message"
+            }
             type="text"
+            disabled={disable() ? "disabled" : ""}
           />
           <button onClick={sendMessage} type="submit">
             Envoyer

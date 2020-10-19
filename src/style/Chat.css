@@ -100,3 +100,10 @@
   padding: 0.7rem;
   color: gray;
 }
+
+.no-messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
