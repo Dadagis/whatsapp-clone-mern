@@ -116,21 +116,7 @@ export default function ChatApp(props) {
       }),
     ];
   });
-  console.log(array);
-  // allTheMessages.filter((message) => {
-  //   console.log(conversations);
-  //   conversations.includes(message.conversation)
-  //     ? console.log("OUI")
-  //     : console.log("NON");
-  // array = [...array, conversations.includes(message.conversation)];
-  // return array;
-  // });
   // console.log(array);
-  // console.log("lol", allTheMessages);
-  // allTheMessages.filter((messages) => {
-  //   conversations.includes(messages.conversation);
-  // });
-  // console.log("allTheMessages", allTheMessages);
   return (
     <div className="App-body">
       <Sidebar user={user} conversations={conversations} messages={messages} />
@@ -140,6 +126,7 @@ export default function ChatApp(props) {
         token={jwt}
         currentChat={currentChat}
         currentUserNames={currentUserNames}
+        location={props.location.pathname}
       />
     </div>
   );
