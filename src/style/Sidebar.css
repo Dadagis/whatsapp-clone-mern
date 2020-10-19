@@ -16,6 +16,7 @@
   align-items: center;
   justify-content: space-between;
   min-width: 10vw;
+  position: relative;
 }
 
 .sidebar-search {
@@ -49,4 +50,40 @@
 }
 #sidebar-chats-container {
   overflow: scroll;
+}
+
+.users-display {
+  position: absolute;
+  list-style-type: none;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  margin-top: 2.3rem;
+  margin-left: 1.5rem;
+  padding: 0;
+  width: 80%;
+  background-color: white;
+}
+
+.users-list {
+  padding: 0.5rem 2.5rem;
+}
+
+.users-list:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.disconect {
+  position: absolute;
+  background-color: white;
+  bottom: 0;
+  margin-bottom: -1rem;
+  right: 0;
+  padding: 0.25rem;
+}
+
+.disconect:hover {
+  background-color: lightgray;
+  cursor: pointer;
 }

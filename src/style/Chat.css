@@ -107,19 +107,3 @@
   align-items: center;
   height: 100%;
 }
-
-.users-display {
-  position: absolute;
-  list-style-type: none;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  margin-top: 2.3rem;
-  margin-left: 1.5rem;
-  width: 80%;
-  background-color: white;
-}
-
-.users-list {
-  padding: 0.5rem 0;
-}
