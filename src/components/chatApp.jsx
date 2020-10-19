@@ -3,8 +3,9 @@ import Sidebar from "./Sidebar";
 import Chat from "./Chat";
 import Pusher from "pusher-js";
 import axios from "../axios";
-import JwtDecode from "jwt-decode";
 import instance from "../axios";
+import isAuthenticated from "../services/authService";
+import { Redirect } from "react-router-dom";
 
 export default function ChatApp(props) {
   const [allMessages, setAllMessages] = useState([]);
@@ -117,6 +118,7 @@ export default function ChatApp(props) {
     ];
   });
   // console.log(array);
+  if (!isAuthenticated()) return <Redirect to="/login" />;
   return (
     <div className="App-body">
       <Sidebar user={user} conversations={conversations} messages={messages} />
