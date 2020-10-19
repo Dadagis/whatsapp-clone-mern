@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 export default function SidebarSearch(props) {
   const [users, setUsers] = useState([]);
@@ -22,7 +23,10 @@ export default function SidebarSearch(props) {
 
   useEffect(() => {
     let filtered = users
-      .filter((user) => user.name.includes(input))
+      .filter(
+        (user) =>
+          user.name.includes(input) || user.name.toLowerCase().includes(input)
+      )
       .slice(0, 10);
     if (input === "") {
       filtered = [];
@@ -59,13 +63,19 @@ export default function SidebarSearch(props) {
           {filtered.length >= 1
             ? filtered.map((user) => {
                 return (
-                  <li
-                    key={user._id}
-                    onClick={() => handleClick(user._id)}
-                    className="users-list"
+                  <NavLink
+                    activeStyle={{ textDecoration: "none", color: "black" }}
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={"/"}
                   >
-                    {user.name}
-                  </li>
+                    <li
+                      key={user._id}
+                      onClick={() => handleClick(user._id)}
+                      className="users-list"
+                    >
+                      {user.name}
+                    </li>
+                  </NavLink>
                 );
               })
             : null}
