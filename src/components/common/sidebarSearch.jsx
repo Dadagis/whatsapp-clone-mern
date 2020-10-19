@@ -24,6 +24,9 @@ export default function SidebarSearch(props) {
     let filtered = users
       .filter((user) => user.name.includes(input))
       .slice(0, 10);
+    if (input === "") {
+      filtered = [];
+    }
     return setFiltered(filtered);
   }, [input]);
 
