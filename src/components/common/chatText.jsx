@@ -14,7 +14,7 @@ export default class ChatText extends Component {
       e.preventDefault();
 
       await axios.post(
-        "/api/messages",
+        "https://limitless-castle-62687.herokuapp.com/api/messages",
         {
           message: this.state.input,
           name: this.props.user.name,
@@ -43,7 +43,6 @@ export default class ChatText extends Component {
       const areMessages = document.getElementsByClassName("no-messages");
       return areMessages.length >= 1 ? true : false;
     };
-    console.log(disable());
 
     return (
       <div className="chat-text">

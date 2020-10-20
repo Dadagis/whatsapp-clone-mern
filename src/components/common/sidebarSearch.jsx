@@ -13,7 +13,7 @@ export default function SidebarSearch(props) {
   const jwt = localStorage.getItem("whatsAppToken");
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/users/", {
+      .get("https://limitless-castle-62687.herokuapp.com/api/users/", {
         headers: { "x-auth-token": jwt },
       })
       .then((response) => {
@@ -40,7 +40,7 @@ export default function SidebarSearch(props) {
 
   const handleClick = (user_id) => {
     axios.post(
-      "http://localhost:4000/api/conversations/",
+      "https://limitless-castle-62687.herokuapp.com/api/conversations/",
       { users: [user._id, user_id] },
       {
         headers: { "x-auth-token": jwt },
