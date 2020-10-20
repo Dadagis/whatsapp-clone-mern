@@ -23,12 +23,10 @@ export default function ChatApp(props) {
   }, [props.location.pathname]);
 
   useEffect(() => {
-    console.log("je suis dans current chat");
     setCurrentChat(props.location.pathname.split("/")[2]);
   }, [currentChat, props.location.pathname]);
 
   useEffect(() => {
-    console.log("je suis dans current user names");
     conversations.map((conversation) => {
       if (conversation._id === currentChat) {
         setCurrentUserNames(
@@ -39,7 +37,6 @@ export default function ChatApp(props) {
   }, [conversations]);
 
   async function fetchUser() {
-    console.log("Je suis dans setUser");
     await instance
       .get("/api/users/me", { headers: { "x-auth-token": jwt } })
       .then((response) => {
@@ -52,23 +49,24 @@ export default function ChatApp(props) {
   }
 
   async function fetchMessages() {
-    console.log("je suis dans set messages");
     const param = props.location.pathname.split("/")[2];
     await axios
-      .get(`/api/messages/${param}`, {
-        headers: {
-          "x-auth-token": jwt,
-        },
-      })
+      .get(
+        `https://limitless-castle-62687.herokuapp.com/api/messages/${param}`,
+        {
+          headers: {
+            "x-auth-token": jwt,
+          },
+        }
+      )
       .then((response) => {
         setMessages(response.data);
       });
   }
 
   async function fetchAllMessages() {
-    console.log("je suis dans set all messages");
     await axios
-      .get(`/api/messages/sync`, {
+      .get(`https://limitless-castle-62687.herokuapp.com/api/messages/sync`, {
         headers: {
           "x-auth-token": jwt,
         },
@@ -96,7 +94,6 @@ export default function ChatApp(props) {
 
   useEffect(() => {
     if (Object.keys(user).length > 0) {
-      console.log("conversations fetch");
       instance
         .get(`/api/conversations/user/${user._id}`, {
           headers: { "x-auth-token": jwt },

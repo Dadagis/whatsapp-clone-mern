@@ -14,7 +14,7 @@ export default function Register(props) {
 
     try {
       await axios
-        .post("/api/users/", {
+        .post("https://limitless-castle-62687.herokuapp.com/api/users/", {
           name: name,
           email: email,
           password: password,

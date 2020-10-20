@@ -6,9 +6,6 @@ export default class ChatBody extends Component {
     this.newData.scrollTop = this.newData.scrollHeight;
   }
   render() {
-    this.props.location === "/chats"
-      ? console.log("NO MESSAGES")
-      : console.log("MESSAGES");
     return (
       <div className="chat-body" ref={(ref) => (this.newData = ref)}>
         {this.props.location === "/chats" ? (
